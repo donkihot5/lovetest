@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wordsoflove</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="margin-top: 59px;">
+    <!--rendering navigation for users, with functionality included-->
+  	<%= render '/layouts/nav' %>
+    <!--rendering users data to the users profile page, logic included, this is because of the banner-->
+    <%= render '/layouts/user_data'%>
+    <!--rendering users data to the show song page, logic included, this is because of the banner-->
+    <%= render '/layouts/song_user_data'%>
+
+
+    <div class='container'>
+       <span class="notice"><%= notice %></span>
+       <span class="alert"><%= alert %></span>
+    <%= yield %>
+    </div>
+  </body>
+</html>

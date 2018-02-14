@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+  <a class="navbar-brand" href="<%= root_path %>">Words of Love</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/songs">Songs<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/stories">Stories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/galleries">Gallery</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/posts">Explore</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Rime</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Messages</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <!--add search form here-->
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag current_user.user_image.url, :size=>"27x27" %>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/user/<%= current_user.username %>">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a  class="dropdown-item" href="/helppages">Help</a>
+          <div class="dropdown-divider"></div>
+          <li class="dropdown-item"><%= link_to('Edit Profile', edit_user_registration_path) %></li></a>
+          <div class="dropdown-divider"></div>
+          <li class="dropdown-item"><%= link_to('Log out', destroy_user_session_path, :method => :delete)%></li>         
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>

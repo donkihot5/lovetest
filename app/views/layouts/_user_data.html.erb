@@ -1,0 +1,52 @@
+<% if params[:id] != nil %>
+      <% @url = '/user/' + params[:id] %>
+        <% if current_page?(@url)%>
+        <%= image_tag User.find_by_username(params[:id]).profile_image.url, class: "profile-banner" %>          
+
+          <div class="row">
+            <div class="col-12" style="background-color: white">
+              <div class="container">
+                <div class="col-sm-3">&nbsp;</div>
+                <!--implemet users profile sttistics-->
+                  <div class="row">
+                    <!--can add spacing if necessary by using following <div class="col-sm-3">&nbsp;</div>-->
+                    <div class="col-sm-3">&nbsp;</div>
+                      <div class="col-1" style="font-size: 100%; opacity: 0.7;">SONGS<br>
+                        <h6 style="color: #0084B4; font-size: 150%;">
+                            <%= User.find_by_username(params[:id]).songs.count %>
+                        </h6>
+                      </div>
+
+                      <div class="col-1" style="font-size: 100%; opacity: 0.7;">STORIES<br>
+                              <h6 style="color: #0084B4; font-size: 150%;">
+                                <%= User.find_by_username(params[:id]).stories.count %>
+                              </h6>
+                      </div>
+
+                      <div class="col-1" style="font-size: 100%; opacity: 0.7;">IMAGES<br>
+                              <h6 style="color: #0084B4; font-size: 150%;">
+                                <%= User.find_by_username(params[:id]).galleries.count %>
+                              </h6>
+                      </div>
+
+                      <div class="col-1 user-mar" style="font-size: 100%; opacity: 0.7;">FOLLOWING<br>
+                              <h6 style="color: #0084B4; font-size: 150%;">
+                                <%= User.find_by_username(params[:id]).following.count %>
+                              </h6>
+                      </div>
+
+                      <div class="col-1" style="font-size: 100%; opacity: 0.7;">FOLLOWERS<br>
+                              <h6 style="color: #0084B4; font-size: 150%;">
+                                <%= User.find_by_username(params[:id]).followers.count %>
+                              </h6>
+                      </div>                      
+                    <!--row end-->
+                  </div>
+                  <!--finish with users profile statistics-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+    <% end %>

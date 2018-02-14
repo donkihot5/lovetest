@@ -1,0 +1,35 @@
+<!--beginning of the stories page, adding first row, columns and populating-->
+<div class="row">
+
+<div class="col-9">
+  <!--implementing basic ror logic-->
+  <% for @s in @stories %>
+  <div class="card mb-3 border-secondary" style="height:277px;">
+      <div class="row">
+
+        <div class="col-6">
+          <%= image_tag @s.story_image.url, :size=>"420x275" %>
+        </div>
+
+        <div class="col-6">
+          <div class="card-body">
+            <h3 class="card-title"><%= @s.title %></h3>
+            <p class="card-text">
+              <%= raw (@s.content.truncate(250)) %>-
+              <%= link_to "Read more...", story_path(@s) %>
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                <%= User.find(@s.user_id).username %> - <%= @s.created_at.to_formatted_s(:short) %>
+              </small>
+            </p>
+          </div>
+        </div>
+
+      </div>
+  </div>
+  <% end %>
+<!--ending the for loop-->
+</div>
+
+</div>

@@ -1,0 +1,59 @@
+<!--beginning of the stories page, adding first row, columns and populating-->
+<div class="row">
+
+<div class="col-9">
+  <!--implementing basic ror logic-->
+  <% for @s in @stories %>
+  <div class="card mb-3 border-secondary" style="height:277px;">
+      <div class="row">
+
+        <div class="col-6">
+          <%= image_tag @s.story_image.url, :size=>"420x275" %>
+        </div>
+
+        <div class="col-6">
+          <div class="card-body">
+            <section class="card-title story-mart" style="color: black; font-size: 125%;"><%= @s.title %></section>
+            <p class="card-text" style="font-size: 90%;">
+              <%= raw (@s.content.truncate(250)) %>-
+              <%= link_to "Read more...", story_path(@s) %>
+            </p>
+            <section class="card-text">
+              <small class="text-muted">
+                <a href="/user/<%= User.find(@s.user_id).username %>" class="info-col">
+                <%= User.find(@s.user_id).username %>
+                </a>
+                - <%= @s.created_at.to_formatted_s(:short) %>
+              </small>
+            </section>
+          </div>
+        </div>
+
+      </div>
+  </div>
+  <% end %>
+<!--ending the for loop-->
+</div>
+
+<div class="col-3">
+    <div class="card border-secondary mb-1">
+      <div class="card-body">
+      <p class="text-muted">Purpose of this section is to share love stories with other users, and to be inspiration for more love in this world!</p>
+      </div>
+    </div>
+
+    <div class="card border-secondary mb-1">
+        <div class="card-body">
+          <h5 style="color: grey; font-size: 125%;">Trending stories</h5>
+            <% for @t in @trendstories %>
+
+            <a href="<%= story_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+            <br>
+            
+            <% end %>     
+        </div>
+    </div>
+
+</div>
+
+</div>

@@ -1,0 +1,6 @@
+<!--ajax implementation should be added here, for dislike option-->
+<%= link_to like_song_path(@s.id, like: false), method: :post, remote: true do %>
+	<i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i> &nbsp <span class="songdislikes-<%= @s.id %>">
+		<%= @s.thumbs_down_total %>
+	</span>  
+<% end %>

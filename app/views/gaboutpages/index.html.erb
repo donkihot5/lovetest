@@ -1,0 +1,32 @@
+<img src="/bg2.jpg" class="about-banner">
+
+
+<div class="row">
+	<% for @a in @abouts %>
+		<div class="col-12 mar">
+			<h3> <%= @a.title %> </h3>
+		</div>
+		<div class="col-8">
+			<p> <%= simple_format(@a.content) %> </p>
+		</div>
+	<% end %>
+</div>
+
+
+<style>
+	.about-banner {
+		width: 1305px;
+		 height: 500px;
+		  margin-left: -100px;
+		  margin-top: -25px;
+	}
+	.mar {
+		margin-top: 15px;
+	}
+	.bac {
+		background-color: pink;
+	}
+	.btn-wid {
+		width: 200px;
+	}
+</style>

@@ -1,0 +1,5 @@
+<!--ajax implementation should be added here, for dislike option-->
+<%= link_to imagelike_gallery_path(@i.id, imagelike: false), method: :post, remote: true do %>
+	<i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i> &nbsp <span class="imagedislikes-<%= @i.id %>"><%= @i.image_thumbs_down_total %>
+	</span>  
+<% end %>

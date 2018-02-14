@@ -1,0 +1,2 @@
+module GaboutpagesHelper
+end

@@ -1,0 +1,72 @@
+<div class="row">
+	<div class="col-12">
+		<% for @u in @users %>
+			<div class="card border-secondary mb-1">
+				<div class="row">
+					<!--start two columns for the profile image of the user-->
+					<div class="col-2">
+						<!--setting columns inside colums in order to make content aligned-->
+						<div class="col-12">
+						<%= image_tag User.find(@u.id).user_image.url, :size=>"150x150" %>
+						</div>
+					</div>
+					<!--end two columns for the profile image of the user-->
+					<!--start columns and rows for informations about the user-->
+					<div class="col-10">
+
+						<div class="col-12">
+							<h5>Username:</h5>
+							<h6 class="adm-mar" style="font-size: 125%;">
+								<a href="/user/<%= User.find(@u.id).username %>" class="info-col">
+								<%= @u.username %>									
+								</a>
+							</h6>
+						</div>
+						
+						<div class="col-12 mb-3">
+							<h5 class="adm-mar2">About:</h5>
+							<p class="adm-mar" style="font-size: 100%; opacity: 0.7;">
+								<%= @u.description %>									
+							</p>
+						</div>
+
+						<div class="col-12">
+							<h5 class="adm-mar">Details:</h5>
+							<div class="row adm-mar">
+								<a href="/adminsongs/<%= User.find(@u.id).username %>" class="info-col2">
+									<div class="col-2" style="font-size: 100%; opacity: 0.7;">SONGS<br>
+								</a>
+									<h6 style="color: #0084B4; font-size: 125%;">
+	                    				<%= @u.songs.count %>
+	                    			</h6>
+								</div>
+							<a href="/adminstories/<%= User.find(@u.id).username %>" class="info-col2">
+									<div class="col-2" style="font-size: 100%; opacity: 0.7;">STORIES<br>
+								</a>
+									<h6 style="color: #0084B4; font-size: 125%;">
+	                    				<%= @u.stories.count %>
+	                    			</h6>
+									</div>
+								<a href="/adminimages/<%= User.find(@u.id).username %>" class="info-col2">
+									<div class="col-2" style="font-size: 100%; opacity: 0.7;">IMAGES<br>
+								</a>
+									<h6 style="color: #0084B4; font-size: 125%;">
+	                    				<%= @u.galleries.count %>
+	                    			</h6>
+									</div>
+								<div class="col-2" style="font-size: 100%; opacity: 0.7;">FOLLOWERS<br>
+									<h6 style="color: #0084B4; font-size: 125%;">
+	                    				<%= @u.followers.count %>
+	                    			</h6>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!--end columns and rows for informations about the user-->
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+	

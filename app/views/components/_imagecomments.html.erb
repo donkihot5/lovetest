@@ -1,0 +1,76 @@
+<!--displaying comments and implementing the reply comments form-->
+<div>
+	<div clas="row">
+		<!--adding an image of the user which has commented on the song-->
+		<div class="row">				
+				
+			<div class="col-12">
+				<div class="card card-mar">
+					<!--displaying the content of the comments-->
+					<p class="mar-top2"><%= simple_format(imagecomments.content) %></p>
+					<small>Commented <%= time_ago_in_words(imagecomments.created_at) %> ago</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--start add a reply form-->
+	<div>
+	  <%= form_for [imagecomments, Imagecomment.new] do |f| %>
+	  	<div class="form-group">
+	  		<div clas="row">
+	  		<div class="col-12 mar-top">
+	  			<%= f.text_area :content, placeholder: "Add a Reply", class: "form-control" %>
+	  		</div>
+	  		<div class="col-2 offset-10">
+	  			<div class="move">
+	  			<%= f.submit "Reply", class: "btn btn-outline-primary btn-sm" %>
+	  			</div>
+	  		</div>
+	  </div>
+	  </div>
+	  <% end %>
+	</div>
+	<!--end add a reply form-->
+
+	<!--render comment replies-->
+	  <div>	  	  	
+	      <%= render partial: 'components/imagecomments', collection: imagecomments.imagecomments %>
+	  </div>
+  	<!--end rendering comment replies-->
+
+	
+
+</div>
+
+<style>
+	.move {
+		margin-left: 5px;
+	}
+	.bac {
+		background-color: pink;
+	}
+	.mar-top {
+		margin-top: 5px;
+	}
+	.mar-top2 {
+		margin-top: -15px;
+	}
+	textarea {
+    height: 50px;
+	}
+	.com-img {
+		height: 35px;
+		width: 35px;
+	}
+	.img-mar {
+		margin-left: 15px;
+	}
+	.card-mar {
+		margin-right: 15px;
+		margin-left: 15px;
+	}
+    .marginer {
+    	margin-left: 25px;
+    }
+</style>

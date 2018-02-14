@@ -1,0 +1,92 @@
+<div class="row">
+
+	<div class="col-3">
+		<div class="card border-secondary mb-1">
+			<%= image_tag User.find_by_username(params[:id]).profile_image.url, :size=>"253x125" %>
+  			<div class="card-body">			
+  				<div class="row">
+  				<!--adding user informations, avatar image and usernema as well as stats-->
+                <div class="col-2">
+                	<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"85x85" %>
+                </div>
+                <div class="col-10"><h5 style="text-align: center; margin-top: 10px; margin-left: 55px;"> <%= User.find_by_username(params[:id]).username %></h5></div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">SONGS<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).songs.count %>
+                    </h6>
+                  </div>
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">FOLLOWERS<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).followers.count %>
+                    </h6>
+                  </div>                
+            	</div>
+			</div>
+		</div>
+
+		<div class="card border-secondary mb-1">
+  			<div class="card-body">
+			<h5 style="color: grey; font-size: 125%;">Trending Songs</h5>
+			<% for @t in @trendsongs%>
+              <a href="<%= song_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+              <br>
+            <% end %>			
+			</div>
+		</div>
+	</div>
+
+	<div class="col-6">
+		<% for @s in @songs %>
+		<div class="card border-secondary mb-1">
+			<div class="card-header">
+				<div class="col-1">
+					<%= image_tag User.find(@s.user_id).user_image.url, :size=>"50x50" %>
+				</div>
+				<div class="col-11 text-muted">
+					<a href="/user/<%= User.find(@s.user_id).username %>" class="info-col">
+						<%= User.find(@s.user_id).username %>							
+					</a> 
+					- <%= @s.created_at.to_formatted_s(:short) %>
+				</div>
+			</div>
+  			<div class="card-body">
+  			<h4 class="card-title">
+  				<a href="<%= song_path(@s) %>" class="link-col"><%= @s.title %></a>
+  			</h4>
+			<p class="card-text"><%= simple_format(@s.content) %></p>
+			</div>
+
+			<div class="card-footer text-muted">
+				<!--Time: <%= @s.created_at.to_formatted_s(:short) %>-->
+			    <!--<%= time_ago_in_words(@s.created_at) %> ago-->
+			    <div class="col-12">
+        			<div class="row">
+
+			            <div class="col-3" id="song_like">
+			            	<%= render partial: '/components/song_like' %>
+			            </div>
+
+			            <div class="col-3" id="song_dislike">
+			                <%= render partial: '/components/song_dislike' %>
+			            </div>
+
+			            <div class="col-4" id="song_comment">
+			            	<%= render partial: '/components/song_comment' %>
+			            </div>
+
+			        </div>
+			    </div>
+			</div>
+
+		</div>
+		<% end %>
+	</div>
+
+	<div class="col-3">
+		
+	</div>
+
+</div>
+

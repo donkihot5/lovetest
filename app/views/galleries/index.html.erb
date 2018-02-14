@@ -1,0 +1,21 @@
+<!--beginning the gallery index page, list all images in the gallery-->
+<!---->
+<div class="row">
+	<!---->
+	<div class="col-12">
+		
+	  <div class="row">
+		<!--start the for loop to display all images in the gallery to the website-->
+		<% for @i in @images %>
+			<div class="col-3 mb-1">
+				<div class="card">
+				<a href="<%= gallery_path(@i) %>"><%= image_tag @i.gallery_image.url, :size=>"200x200", class: "posgal" %></a>
+				</div>
+			</div>
+		<% end %>
+	  </div>
+
+	</div>
+	<!---->
+	<!---->
+</div>

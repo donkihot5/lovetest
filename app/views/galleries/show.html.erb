@@ -1,0 +1,92 @@
+<div class="row">
+
+	<div class="col-3">
+		<div class="card border-secondary mb-1">
+			<%= image_tag User.find(@i.user_id).profile_image.url, :size=>"253x125" %>
+  			<div class="card-body">			
+  				<div class="row">
+  				<!--adding user informations, avatar image and usernema as well as stats-->
+                <div class="col-2">
+                	<%= image_tag User.find(@i.user_id).user_image.url, :size=>"85x85" %>
+                </div>
+                <div class="col-10"><h5 style="text-align: center; margin-top: 10px; margin-left: 55px;"> <%= User.find(@i.user_id).username %></h5></div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">IMAGES<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find(@i.user_id).galleries.count %>
+                    </h6>
+                  </div>
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">FOLLOWERS<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find(@i.user_id).followers.count %>
+                    </h6>
+                  </div>                
+            	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-6">
+		<div class="card border-secondary mb-1">
+			<div class="card-header">
+				<div class="col-1">
+					<%= image_tag User.find(@i.user_id).user_image.url, :size=>"50x50" %>
+				</div>
+				<div class="col-11 text-muted">
+					<a href="/user/<%= User.find(@image.user_id).username %>" class="info-col">
+						<%= User.find(@i.user_id).username %>							
+					</a> 
+					- <%= @i.created_at.to_formatted_s(:short) %>
+				</div>
+			</div>
+  			<div class="card-body">
+  			<h4 class="card-title">
+  				<a href="<%= gallery_path(@image) %>" class="link-col"><%= @i.title %></a>
+  			</h4>
+  			<%= image_tag @i.gallery_image.url, :size=>"500x300" %>
+			<p class="card-text"><%= simple_format(@i.content) %></p>
+
+			<!--checking if the user is the one which owns the post or if the user is administrator-->
+	          <% if (@i.user == current_user || current_user.admin?) %>
+	          <%= link_to "Edit", edit_gallery_path(@i), class: "btn btn-outline-primary btn-sm" %>
+	          <% end %>
+	          <% if (@i.user == current_user || current_user.admin?) %>
+	          <%= link_to "Delete", @i, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+	          <% end %>
+
+			</div>
+
+			<div class="card-footer text-muted">
+			    <div class="col-12">
+        			<div class="row">
+
+			            <div class="col-3" id="song_like">
+			            	<%= render partial: '/components/image_like' %>
+			            </div>
+
+			            <div class="col-3" id="song_dislike">
+			                <%= render partial: '/components/image_dislike' %>
+			            </div>
+
+			            <div class="col-4" id="song_comment">
+			            	<%= render partial: '/components/image_comment' %>
+			            </div>
+
+			        </div>
+			    </div>
+			</div>
+			<!--implementing comments for images-->
+			<%= render partial: 'components/imagecomment_form' %>
+			<!--rendering reply to the comments form, and replied comments-->					
+  			<%= render(partial: 'components/imagecomments', collection: @i.imagecomments) %>
+			<!--end implementing comments for images-->
+		</div>
+	</div>
+
+	<div class="col-3">
+		
+	</div>
+
+</div>
+

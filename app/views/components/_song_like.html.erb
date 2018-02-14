@@ -1,0 +1,6 @@
+<!--ajax implementation should be added here, for like option-->
+<%= link_to like_song_path(@s.id, like: true), remote: true, method: :post do %>
+	<i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i> &nbsp <span class="songlikes-<%= @s.id %>">
+		<%= @s.thumbs_up_total %>
+	</span>        
+<% end %>

@@ -1,0 +1,206 @@
+<!--beginning of row 2, adding another panel for thrends or something xd xd...-->
+<div class="row">
+	<!--display users avatar image-->
+	<div class="col-3">
+      <div class="col-sm-12" style="margin-top: -200px;">        
+        <%= image_tag User.find_by_username(params[:id]).user_image.url(:medium) %>        
+      </div>
+      <!--used to display user description, like a short biography-->
+      <div class="col-sm-12">
+
+      	<div class="row">
+      		<div class="col-7">
+        		<h5 style="font-weight: bold;"><%= params[:id] %></h5>
+    		</div>
+    		<div class="col-5" style="margin-left: -5px;">
+    			<!--rendering of follow button feature, here we have local passing to the partial-->
+    			<div id="thebutton">
+				<%= render '/components/follow_button', :user => User.find_by_username(params[:id]) %>
+				</div>
+    		</div>
+    	</div>
+
+    	<div class="row" style="margin-top: 5px;">
+    		<div class="col-12">
+		        <p>
+		        	<%= User.find_by_username(params[:id]).description %>
+		        </p>
+    		</div>
+        </div>
+
+      </div>
+    </div>
+	
+	<div class="col-6">
+		<!--renders add song form only for the logged in user, and not for other profiles-->
+		<% if current_user.id == User.find_by_username(params[:id]).id %>
+		<%= render '/components/song_form' %>
+		<% end %>
+		<!--lists al songs of user on its profile page-->
+		<% for @s in @songs %>
+		<div class="card border-secondary mb-1">
+			<div class="card-header">
+				<div class="col-1">
+					<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"50x50" %>
+				</div>
+				<div class="col-11 text-muted">
+					<%= User.find(@s.user_id).username %> - <%= @s.created_at.to_formatted_s(:short) %>
+				</div>
+			</div>
+
+	  		<div class="card-body">
+	  			<h4 class="card-title">
+	  				<a href="<%= song_path(@s) %>" class="link-col"><%= @s.title %></a>
+	  			</h4>
+				<p class="card-text"><%= simple_format(@s.content) %></p>
+			</div>
+			<!--includes like, dislike and comment partials, which need to be refreshed frequently on the page, without reloading the entire page-->
+			<div class="card-footer text-muted">
+				<!--Time: <%= @s.created_at.to_formatted_s(:short) %>-->
+			    <!--<%= time_ago_in_words(@s.created_at) %> ago-->
+			    <div class="col-12">
+        			<div class="row">
+        				<!--renders likes to the song-->
+			            <div class="col-3">
+			            	<%= render '/components/song_like' %>
+			            </div>
+			            <!--renders dislikes to the song-->
+			            <div class="col-3">
+			                <%= render '/components/song_dislike' %>
+			            </div>
+			            <!--renders comments for the song-->
+			            <div class="col-4">
+			            	<%= render '/components/song_comment' %>
+			            </div>
+
+			        </div>
+			    </div>
+			</div>
+			  	
+		</div>
+		<% end %>
+		<!--end listing of songs-->
+		<!--start listing user stories on the profile-->
+
+		<% for @s in @stories %>
+			<div class="card border-secondary mb-1">
+			<div class="card-header">
+				<div class="col-1">
+					<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"50x50" %>
+				</div>
+
+				<div class="col-11 text-muted">
+					<%= User.find(@s.user_id).username %> - <%= @s.created_at.to_formatted_s(:short) %>
+				</div>
+			</div>
+
+		  	<div class="card-body">
+		  		<h4 class="card-title">
+		  			<a href="<%= story_path(@s) %>" class="link-col"><%= @s.title %></a>
+		  		</h4>
+					<p class="card-text">
+						<%= raw (@s.content.truncate(250)) %>-
+	    				<%= link_to "Read more...", story_path(@s) %>
+					</p>
+			</div>						  	
+			</div>
+		<% end %>
+
+		<!--end listing stories-->
+	</div>
+	
+	<div class="col-3">
+		<!--display add new post links only to the current user profile-->
+		<% if current_user.id == User.find_by_username(params[:id]).id %>
+		<div class="card border-secondary mb-1">
+  			<div class="card-body">
+			<h5 style="color: grey; font-size: 125%;">New Post</h5>
+				<div class="col-12">
+					<div class="row mb-2">
+		              <%= link_to "New Song", new_song_path(@song), class: "btn btn-outline-primary btn-sm btn-wid" %>
+		            </div>
+		            <div class="row mb-2">    
+		              <%= link_to "New Story", new_story_path(@story), class: "btn btn-outline-primary btn-sm btn-wid" %>
+		            </div>
+		            <div class="row mb-2">    
+		              <%= link_to "New Image", new_gallery_path(@image), class: "btn btn-outline-primary btn-sm btn-wid" %>
+		            </div>                
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<!--render users otions-->
+		<% if current_user.admin? %>
+		<%= render '/components/admin_users', :user => User.find_by_username(params[:id]) %>
+		<% end %>		
+		<!--otions rendered-->
+		<!--lists users which have highest number of followers-->
+		<div class="card border-secondary mb-1">
+			<!--adding the user image to the username of follow user-->
+  			<div class="card-body">
+  				<!---->
+  				<div class="col-12">
+		  			<div class="row">
+					  <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
+					</div>
+				</div>
+				<!--displaying small list of users which can be followed-->
+				<div class="col-12">
+				   <div class="row">
+					<% for @u in @toFollow do %>
+					   <!--adding user profile images to hte list of users which can be followed-->
+					   <div class="col-3 prof-mar">
+						 <%= image_tag User.find(@u.id).user_image.url, :size=>"50x50" %>
+					   </div>
+					   <!---->
+					   <div class="col-7 offset-2">
+					   	   <!--adding username links to visit other profiles-->
+					   	   <div class="row">					   	
+				            <p style="font-weight: bold; opacity: 0.85;" >
+				              <a href="/user/<%= @u.username %>" class="link-col" ><%= @u.username %></a>
+				            </p>
+			               </div>
+			               <!--displaying the total number of user posts if possible-->
+			               <div class="row text-muted fol-mar">
+							<p>
+							Total posts: <%= @u.songs.count + @u.stories.count + @u.galleries.count %>
+							</p>			               	
+			               </div>
+		           	   	<!---->
+		           	   </div>
+		            <% end %>
+		           </div>
+		    	</div>
+			</div>
+		</div>
+		<!--lists songs with highest number of likes-->
+
+		<div class="card border-secondary mb-1">
+  			<div class="card-body">
+			<h5 style="color: grey; font-size: 125%;">Trending Songs</h5>
+			<% for @t in @trendsongs%>
+              <a href="<%= song_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+              <br>
+            <% end %>			
+			</div>
+		</div>
+
+		<div class="card border-secondary mb-1">
+        <div class="card-body">
+          <h5 style="color: grey; font-size: 125%;">Trending stories</h5>
+            <% for @t in @trendstories %>
+
+            <a href="<%= story_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+            <br>
+            
+            <% end %>     
+        </div>
+    </div>
+
+	</div>
+
+</div>
+
+<!--<style>
+</style>-->

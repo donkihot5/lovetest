@@ -1,0 +1,57 @@
+<div class="row">
+
+	<div class="col-3">
+		<div class="card border-secondary mb-1">
+			<%= image_tag User.find_by_username(params[:id]).profile_image.url, :size=>"253x125" %>
+  			<div class="card-body">			
+  				<div class="row">
+  				<!--adding user informations, avatar image and usernema as well as stats-->
+                <div class="col-2">
+                	<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"85x85" %>
+                </div>
+                <div class="col-10"><h5 style="text-align: center; margin-top: 10px; margin-left: 55px;"> <%= User.find_by_username(params[:id]).username %></h5></div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">IMAGES<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).galleries.count %>
+                    </h6>
+                  </div>
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">FOLLOWERS<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).followers.count %>
+                    </h6>
+                  </div>                
+            	</div>
+			</div>
+		</div>
+
+		<div class="card border-secondary mb-1">
+        <div class="card-body">
+          <h5 style="color: grey; font-size: 125%;">Trending images</h5>
+            <% for @t in @trendimages %>
+
+            <a href="<%= gallery_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+            <br>
+            
+            <% end %>     
+        </div>
+    </div>
+	</div>
+
+	<div class="col-9">
+	  <!--implementing basic ror logic-->
+	  <div class="row">
+	  <% for @i in @images %>
+			<div class="col-4 mb-1">
+				<div class="card">
+				<a href="<%= gallery_path(@i) %>"><%= image_tag @i.gallery_image.url, :size=>"200x200", class: "posgal" %></a>
+				</div>
+			</div>
+		<% end %>
+	<!--ending the for loop-->
+	  </div>
+	</div>
+
+</div>
+

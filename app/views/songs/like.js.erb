@@ -1,0 +1,9 @@
+$(".songlikes-"+"<%= @s.id %>").html("<%=  @s.thumbs_up_total %>");
+
+$(".songdislikes-"+"<%= @s.id %>").html("<%=  @s.thumbs_down_total %>");
+
+//$("#song_like").load("<%= j render partial: '/components/song_like' %>");
+
+//$("#song_dislike").load("<%= j render partial: '/components/song_dislike' %>");
+
+//$('#songs_like').html("<%= escape_javascript(render partial: '/components/song_like', locals: { s: @s, like: @like } ) %>");

@@ -1,0 +1,97 @@
+<!--beginning of row 2, adding another panel for thrends or something xd xd...-->
+<div class="row">
+	<!--display users avatar image-->
+	<div class="col-3">
+      <div class="col-sm-12" style="margin-top: -200px;">        
+        <%= image_tag User.find_by_username(params[:id]).user_image.url(:medium) %>        
+      </div>
+      <!--used to display user description, like a short biography-->
+      <div class="col-sm-12">
+        <h3 style="font-weight: bold;"><%= params[:id] %></h3>
+        <p>
+        	<%= User.find_by_username(params[:id]).description %>
+        </p>   
+      </div>
+    </div>
+	
+	<div class="col-6">
+		<!--renders add song form only for the logged in user, and not for other profiles-->
+		<% if current_user.id == User.find_by_username(params[:id]).id %>
+		<%= render '/components/song_form' %>
+		<% end %>
+		<!--lists al songs of user on its profile page-->
+		<% for @s in @songs %>
+		<div class="card border-danger">
+			<div class="card-header">
+				<div class="col-1">
+					<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"50x50" %>
+				</div>
+				<div class="col-11 text-muted">
+					<%= User.find(@s.user_id).username %> - <%= @s.created_at.to_formatted_s(:short) %>
+				</div>
+			</div>
+
+	  		<div class="card-body">
+	  			<h4 class="card-title"><%= @s.title %></h4>
+				<p class="card-text"><%= simple_format(@s.content) %></p>
+			</div>
+			<!--includes like, dislike and comment partials, which need to be refreshed frequently on the page, without reloading the entire page-->
+			<div class="card-footer text-muted">
+				<!--Time: <%= @s.created_at.to_formatted_s(:short) %>-->
+			    <!--<%= time_ago_in_words(@s.created_at) %> ago-->
+			    <div class="col-12">
+        			<div class="row">
+        				<!--renders likes to the song-->
+			            <div class="col-3">
+			            	<%= render '/components/song_like' %>
+			            </div>
+			            <!--renders dislikes to the song-->
+			            <div class="col-3">
+			                <%= render '/components/song_dislike' %>
+			            </div>
+			            <!--renders comments for the song-->
+			            <div class="col-4">
+			            	<%= render '/components/song_comment' %>
+			            </div>
+
+			        </div>
+			    </div>
+			</div>
+			  	
+		</div>
+		<% end %>
+	</div>
+	
+	<div class="col-3">
+		<!--rendering of follow button feature-->
+		<%= render '/components/follow_button', :user => User.find_by_username(params[:id]) %>
+		<!--lists users which have highest number of followers-->
+		<div class="card border-danger">
+  			<div class="card-body">
+			<h5 style="color: grey; font-size: 125%;">Who to follow</h5>
+				<% for @u in @toFollow do %>
+	               <p style="font-weight: bold; opacity: 0.85;" >
+	               	<a href="/user/<%= @u.username %>"><%= @u.username %></a>
+	               </p>
+	            <% end %>
+			</div>
+		</div>
+		<!--lists songs with highest number of likes-->
+		<div class="card border-danger">
+  			<div class="card-body">
+			<h5 style="color: grey; font-size: 125%;">Trending songs</h5>
+              <a href="">#Trend #1</a><br>
+                <span style="color: grey;">31k Posts</span><br><br>
+              <a href="">#Trend #2</a><br>
+                <span style="color: grey;">25k Posts</span><br><br>
+              <a href="">#Trend #3</a><br>
+                <span style="color: grey;">16k Posts</span><br><br>
+			  </div>
+		</div>
+
+	</div>
+
+</div>
+
+<!--<style>
+</style>-->

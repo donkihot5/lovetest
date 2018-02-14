@@ -1,0 +1,77 @@
+<div class="row">
+
+	<div class="col-3">
+		<div class="card border-secondary mb-1">
+			<%= image_tag User.find_by_username(params[:id]).profile_image.url, :size=>"253x125" %>
+  			<div class="card-body">			
+  				<div class="row">
+  				<!--adding user informations, avatar image and usernema as well as stats-->
+                <div class="col-2">
+                	<%= image_tag User.find_by_username(params[:id]).user_image.url, :size=>"85x85" %>
+                </div>
+                <div class="col-10"><h5 style="text-align: center; margin-top: 10px; margin-left: 55px;"> <%= User.find_by_username(params[:id]).username %></h5></div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">STORIES<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).stories.count %>
+                    </h6>
+                  </div>
+                  <div class="col-6" style="font-size: 80%; opacity: 0.7;">FOLLOWERS<br>
+                    <h6 style="color: #0084B4; font-size: 200%;">
+                    	<%= User.find_by_username(params[:id]).followers.count %>
+                    </h6>
+                  </div>                
+            	</div>
+			</div>
+		</div>
+
+		<div class="card border-secondary mb-1">
+        <div class="card-body">
+          <h5 style="color: grey; font-size: 125%;">Trending stories</h5>
+            <% for @t in @trendstories %>
+
+            <a href="<%= story_path(@t) %>" class="trendy-col"><%= @t.title %></a><br>
+            <br>
+            
+            <% end %>     
+        </div>
+    </div>
+	</div>
+
+	<div class="col-9">
+  <!--implementing basic ror logic-->
+  <% for @s in @stories %>
+  <div class="card mb-3 border-secondary" style="height:277px;">
+      <div class="row">
+
+        <div class="col-6">
+          <%= image_tag @s.story_image.url, :size=>"420x275" %>
+        </div>
+
+        <div class="col-6">
+          <div class="card-body">
+            <section class="card-title story-mart" style="color: black; font-size: 125%;"><%= @s.title %></section>
+            <p class="card-text" style="font-size: 90%;">
+              <%= raw (@s.content.truncate(250)) %>-
+              <%= link_to "Read more...", story_path(@s) %>
+            </p>
+            <section class="card-text">
+              <small class="text-muted">
+                <a href="/user/<%= User.find(@s.user_id).username %>" class="info-col">
+                <%= User.find(@s.user_id).username %>
+                </a>
+                - <%= @s.created_at.to_formatted_s(:short) %>
+              </small>
+            </section>
+          </div>
+        </div>
+
+      </div>
+  </div>
+  <% end %>
+<!--ending the for loop-->
+</div>
+
+</div>
+

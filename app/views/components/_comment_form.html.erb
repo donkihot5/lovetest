@@ -1,0 +1,32 @@
+<!--add new comment form, implemented as it needs to be, and functional-->
+<%= form_for ([@s, Comment.new]) do |f| %>
+<div class="form-group">
+
+		<div clas="row">
+			<div class="col-12 mar-top">				
+				<%= f.text_area :content, placeholder: "Add new comment", class: "form-control" %>
+			</div>
+			<div class="mar">
+			<div class="col-2 offset-10">
+				<%= f.submit "Comment", class: "btn btn-outline-primary btn-sm" %>
+			</div>
+			</div>
+		</div>
+</div>
+
+<% end %>
+
+<style>
+	.mar {
+		margin-right: 25px;
+	}
+	.bac {
+		background-color: pink;
+	}
+	.mar-top {
+		margin-top: 5px;
+	}
+	textarea {
+    height: 50px;
+    
+</style>

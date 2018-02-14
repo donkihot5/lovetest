@@ -1,0 +1,146 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import "bootstrap";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+.post-owner {
+    color: black;
+    font-weight: bold;
+}
+.post-creation {
+    opacity: 0.7;
+}
+.g-links {
+    opacity: 0.4;
+    font-size: 120%;
+    margin-right: 75px;
+}
+.post-form-panel {
+    margin-bottom: -21px;
+}
+.panel-image img.panel-image-preview {
+    width: 100%;
+    border-radius: 4px 4px 0px 0px;
+}
+.panel-heading ~ .panel-image img.panel-image-preview {
+    border-radius: 0px;
+}
+.panel-image ~ .panel-body, .panel-image.hide-panel-body ~ .panel-body {
+    overflow: hidden;
+}
+.panel-image ~ .panel-footer a {
+    padding: 0px 10px;
+    font-size: 1.3em;
+    color: rgb(100, 100, 100);
+}
+.panel-image.hide-panel-body ~ .panel-body {
+    height: 0px;
+    padding: 0px;
+}
+.panel-footer {
+    background-color: white;
+}
+.profile-banner {
+    width: 100%;
+    height: 500px;
+    margin-top: -21px;
+}
+.posgal{
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+.navbar {
+    background-color: #4d0000;
+}
+body {
+    background-color: #f6f6f6;
+}
+.link-col {
+  color: black;
+  text-decoration: none; /* no underline */
+}
+a.link-col:hover {
+    text-decoration: none;
+    color: #0084B4;
+}
+.info-col {
+  color: grey;
+  text-decoration: none; /* no underline */
+}
+a.info-col:hover {
+    text-decoration: none;
+    color: #0084B4;
+}
+.prof-mar {
+    margin-left: -15px;   
+}
+.fol-mar {
+    margin-top: -15px;   
+}
+.color {
+    background-color: pink;
+}
+.color2 {
+    background-color: #0084B4;
+}
+.ad-pad {
+    padding-top: 15px;
+}
+.adm-mar {
+    margin-top: -10px;
+}
+.adm-mar2 {
+    margin-top: -5px;
+}
+
+.info-col2 {
+  color: #2b3845;
+  text-decoration: none; /* no underline */
+}
+a.info-col2:hover {
+    text-decoration: none;
+    color: #0084B4;
+}
+.btn-wid {
+    width: 250px;
+}
+.guest {
+    height: 27px;
+    width: 27px;
+}
+.story-mart {
+    margin-top: -15px;
+}
+.story-marb {
+    
+}
+.story-pad {
+    
+}
+.user-mar {
+    margin-right: 35px;
+}
+.trendy-col {
+  color: #A0A0A0;
+  text-decoration: none; /* no underline */
+}
+a.trendy-col:hover {
+    text-decoration: none;
+    color: #0084B4;
+}

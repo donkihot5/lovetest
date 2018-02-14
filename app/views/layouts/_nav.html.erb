@@ -1,0 +1,12 @@
+<!--here we willl now implement slightly different version of navigation menu
+we will render separate partial files here, depending if the user is signed in or not
+more logic need to be added when imaplementing admin user, and restrictions to the pages which are allowed to be accessed to certain users-->
+<% if !user_signed_in? %>
+<%= render '/layouts/nav_guest' %>
+	<% else %>
+		<% if current_user.admin? %>
+		<%= render '/layouts/nav_admin' %>
+		<% else %>
+		<%= render '/layouts/nav_user' %>
+		<% end %>
+<% end %>

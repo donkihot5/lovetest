@@ -1,0 +1,48 @@
+<img src="/bg2.jpg" class="about-banner">
+
+
+<div class="row">
+	<div class="col-12 mar">
+	<% if (current_user.admin?) %>
+		<%= link_to "New", new_aboutpage_path(@a), class: "btn btn-outline-primary btn-sm btn-wid" %>
+	<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<% for @a in @abouts %>
+		<div class="col-12 mar">
+			<h3> <%= @a.title %> </h3>
+		</div>
+		<div class="col-8">
+			<p> <%= simple_format(@a.content) %> </p>
+		</div>
+		<div class="col-12">
+			<% if (current_user.admin?) %>
+			<%= link_to "Edit", edit_aboutpage_path(@a), class: "btn btn-outline-primary btn-sm" %>
+			<% end %>
+			<% if (current_user.admin?) %>
+			<%= link_to "Delete", @a, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+
+<style>
+	.about-banner {
+		width: 1305px;
+		 height: 500px;
+		  margin-left: -100px;
+		  margin-top: -25px;
+	}
+	.mar {
+		margin-top: 15px;
+	}
+	.bac {
+		background-color: pink;
+	}
+	.btn-wid {
+		width: 200px;
+	}
+</style>

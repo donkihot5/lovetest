@@ -1,0 +1,28 @@
+<!--show the full story-->
+<div class="row">
+
+  <div class="col-12">
+    <!--adding the functionality to show full story by id-->
+    <div class="card border-secondary mb-3">
+      <%= image_tag @story.story_image.url, :size=>"1109x350" %>
+      <div class="card-body">
+        <h2 class="card-title"><%= @story.title %></h2>
+        <p class="card-text"><%= simple_format(@story.content) %></p>
+        <!--checking if the user is the one which owns the post or if the user is administrator-->
+          <% if (@story.user == current_user || current_user.admin?) %>
+          <%= link_to "Edit", edit_story_path(@story), class: "btn btn-outline-primary btn-sm" %>
+          <% end %>
+          <% if (@story.user == current_user || current_user.admin?) %>
+          <%= link_to "Delete", @story, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+          <% end %>
+      </div>
+      <div class="card-footer text-muted">
+          <a href="/user/<%= User.find(@story.user_id).username %>" class="info-col">
+            <%= @story.user.username %>              
+          </a>
+           - <%= @story.created_at.to_formatted_s(:short) %>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,43 @@
+<%= form_for @story, html: { multipart: true } do |f| %>
+ 
+    <!---->
+<div class="row">
+    <div class="col-8 offset-2">
+      <p>
+      <h3>Add New Story</h3>
+      </p>
+      <!---->
+        <div class="form-group">
+          <%= f.label :title %><br />
+          <%= f.text_field :title, autofocus: true, class: "form-control" %>
+          <small class="form-text text-muted">Your title can have 100 characters!</small>
+        </div>
+        <!---->
+        <div class="form-group">
+          <%= f.label :content %><br />
+          <%= f.text_area :content, autofocus: true, rows: 5, class: "form-control"  %>
+          <small class="form-text text-muted">Share your love story, be inspiration for others!</small>
+        </div>
+        <!--following part is for adding images to the stories page-->
+        <div class="form-group">
+          <%= f.label :story_image %><br />
+          <%= f.file_field :story_image, autofocus: true, class: "form-control-file" %>
+        </div>
+        <!---->
+        <div class="form-group">
+          <div class="actions">
+            <%= f.submit "Add Story", class: "btn btn-primary"%>
+          </div>
+        </div>
+        <!---->
+        <!---->
+     </div>
+</div>
+
+<% end %>
+
+    <style>
+      input, textarea, select, .uneditable-input{
+        width: 100%;
+      }
+    </style>

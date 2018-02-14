@@ -1,0 +1,19 @@
+<!--landing page for words of lovem displaying the cover image as well determining where the user will be redirected after the succesful log in/sign up-->
+<% if !user_signed_in? %>
+
+	<style>
+		body {
+	    background: url("/bg2.jpg") center center fixed;
+	    margin-top: 0px;
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+      }
+	</style>
+
+<% else %>
+<!--<h1>Implemetn index page</h1>-->
+ <script> document.location = "/songs"</script>
+<% end %>
+
